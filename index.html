@@ -1,157 +1,1166 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>แผนบอตตัดต่อ</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
-<style>
-/* Layout: single reading column, sticky section nav, comparison tables, one pricing-flow strip */
-:root{
-  --bg:#f4f7f8; --surface:#ffffff; --fg:#13222b; --muted:#566872; --line:#d5dfe3;
-  --accent:#0e7a78; --accent-soft:#dff1f0; --hi:#c98a0a; --hi-soft:#fbf0d4;
-  --f-display:'Bai Jamjuree','IBM Plex Sans Thai',sans-serif;
-  --f-body:'IBM Plex Sans Thai','Noto Sans Thai',system-ui,sans-serif;
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0f1a20; --surface:#16252d; --fg:#e6eef1; --muted:#9bb0b9; --line:#2a3f49;
-  --accent:#4cc3c0; --accent-soft:#17383a; --hi:#f0b640; --hi-soft:#3a2f12; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0f1a20; --surface:#16252d; --fg:#e6eef1; --muted:#9bb0b9; --line:#2a3f49;
-  --accent:#4cc3c0; --accent-soft:#17383a; --hi:#f0b640; --hi-soft:#3a2f12; color-scheme:dark}
-*{box-sizing:border-box}
-body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.8;
-  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
-.wrap{max-width:820px;margin:0 auto}
-header{padding-block:40px 20px}
-.kicker{font-size:13px;letter-spacing:.04em;color:var(--accent);font-weight:600}
-h1{font-family:var(--f-display);font-size:clamp(28px,6vw,44px);line-height:1.25;margin:6px 0 10px;text-wrap:balance}
-.meta{color:var(--muted);font-size:14px}
-nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;border-bottom:1px solid var(--line);
-  display:flex;gap:6px;overflow-x:auto;padding-block:8px;margin-bottom:8px}
-nav a{white-space:nowrap;color:var(--muted);text-decoration:none;font-size:14px;padding:4px 12px;border-radius:99px}
-nav a:hover,nav a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
-section{padding-block:28px 8px;scroll-margin-top:60px}
-h2{font-family:var(--f-display);font-size:24px;line-height:1.3;margin:0 0 12px;text-wrap:balance}
-h3{font-family:var(--f-display);font-size:17px;margin:0 0 4px}
-p{margin:0 0 12px;max-width:65ch}
-.tldr{background:var(--accent);color:#fff;border-radius:10px;padding:20px 22px;font-size:17px}
-.tldr b{color:#fff;border-bottom:2px solid var(--hi)}
-:root[data-theme="dark"] .tldr,.tldr{color:#fff}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tldr{background:#0c5c5a}}
-:root[data-theme="dark"] .tldr{background:#0c5c5a}
-.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px}
-th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}
-th{font-family:var(--f-display);font-size:14px;color:var(--muted);background:var(--bg)}
-tr:last-child td{border-bottom:0}
-td:first-child{font-weight:600;white-space:nowrap}
-.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.pair>div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;min-width:0}
-.pair p{margin:0;font-size:15px}
-.tag{display:inline-block;font-size:12px;font-weight:600;padding:1px 10px;border-radius:99px;margin-bottom:6px}
-.on{background:var(--accent-soft);color:var(--accent)}
-.off{background:var(--hi-soft);color:var(--hi)}
-ul.plain{margin:0 0 12px;padding-left:20px}ul.plain li{margin-bottom:6px;max-width:65ch}
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;counter-reset:s;list-style:none;padding:0;margin:0}
-.flow li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px;font-size:15px;line-height:1.6}
-.flow li::before{content:counter(s);display:block;font-family:var(--f-display);font-weight:700;color:var(--accent);font-size:22px}
-.price{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.price>div{border:1px solid var(--line);border-radius:8px;padding:16px 18px;background:var(--surface)}
-.price .now{border-color:var(--accent);border-width:2px}
-.price strong{font-family:var(--f-display);font-size:18px}
-.check{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-.check label{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;cursor:pointer}
-.check input{width:20px;height:20px;margin-top:4px;accent-color:var(--accent);flex:none}
-.check input:checked+span{color:var(--muted);text-decoration:line-through}
-.prog{font-size:14px;color:var(--muted);margin-bottom:10px}
-.note{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-</style>
-<div class="wrap">
-<header>
-  <div class="kicker">สรุปจากแชต Discord · 24 ต.ค. 2569</div>
-  <h1>แผนบอตตัดต่อและการปรับเว็บขาย</h1>
-  <div class="meta">ผู้พูด mewteetawat.ai · ข้อความถูกส่งซ้ำ 2 รอบเพราะเน็ตหลุด สรุปไว้รอบเดียว</div>
-</header>
-<nav aria-label="สารบัญ">
-  <a href="#tldr">ภาพรวม</a><a href="#brain">สมอง 2 ซีก</a><a href="#jtbd">จุดขาย</a><a href="#web">ปรับเว็บ</a><a href="#early">Early Bird</a><a href="#todo">ต้องทำ</a>
-</nav>
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MewTeetawat.AI — Editing Bot • Brain 2.0 | เทคเดียวจบ คลิปพร้อมลงแบบมือโปร</title>
+  <meta name="description" content="บอตตัดต่อตัวจริงที่มีสมอง 2 ซีก ผสานศาสตร์ครีเอทีฟและกลยุทธ์การตลาด ไม่ใช่แค่คอร์สเรียน ให้ AI วางโครง กำกับจังหวะ และเนรมิตโมเดล 3D ในคลิกเดียว" />
+  <meta name="theme-color" content="#FDF9EF" />
 
-<section id="tldr">
-  <div class="tldr">ทำ <b>บอตตัดต่อ</b> ตัวเดียวที่มี <b>สมอง 2 ซีก</b> ทำเว็บขายโดยใช้เว็บของจัสตินเป็นฐาน 100% เพิ่มความเป็นตัวเองอีกราว 30% และเปลี่ยนจากให้ลงทะเบียนเป็น <b>จ่ายเงินได้เลย</b> แบบ Early Bird</div>
-  <p style="margin-top:16px">ต่างจาก ContentOS ที่มีบอต 3 ตัว บอตตัวใหม่นี้มีตัวเดียว แต่ฉลาดสองด้าน</p>
-</section>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Pridi:wght@400;500;600&display=swap" rel="stylesheet" />
 
-<section id="brain">
-  <h2>สมอง 2 ซีก</h2>
-  <div class="tbl"><table>
-    <tr><th>ซีก</th><th>ทำอะไร</th></tr>
-    <tr><td>ครีเอทีฟ</td><td>ช่วยกำกับและตัดต่อ เลือกฟอนต์ เลือกสี ใส่โมเดล 3D ให้ผลงานสวย</td></tr>
-    <tr><td>การตลาด</td><td>ทำคลิปให้ไวรัล เช่น ฮุก 3 วินาทีแรก เปลี่ยนซูม และแก้สคริปต์ให้ดีขึ้นได้</td></tr>
-  </table></div>
-  <p style="margin-top:16px">ผู้ใช้เปิดหรือปิดสมองการตลาดได้</p>
-  <div class="pair">
-    <div><span class="tag on">เปิด</span><p>AI แก้สคริปต์และฮุก ดึงช่วงที่เด่นที่สุดมาไว้หน้าคลิป เหมาะกับคนที่พูดไม่มีสคริปต์ ได้คลิปจบในเทคเดียว</p></div>
-    <div><span class="tag off">ปิด</span><p>ไม่แตะสคริปต์ ตัดเฉพาะส่วนที่พูดวนให้กระชับและเนียนที่สุด เล่าเป็นเส้นตรง เหมาะกับคนที่คิดสคริปต์มาแล้ว</p></div>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: {
+              50: '#FDF9EF',
+              100: '#F6F2E6',
+              200: '#F1EEE4',
+              300: '#EAE8DE',
+              400: '#DCD8C8',
+            },
+            forest: {
+              950: '#0A1913',
+              900: '#0F241C',
+              850: '#0E291E',
+              800: '#143025',
+              700: '#1D4334',
+              600: '#275945',
+            },
+            ochre: {
+              400: '#E5B84B',
+              500: '#C98A0A',
+              600: '#8C6613',
+              700: '#79590F',
+              800: '#614609',
+            },
+            ink: {
+              900: '#13201A',
+              700: '#33423B',
+              500: '#5C6B63',
+              400: '#829189',
+            }
+          },
+          fontFamily: {
+            editorial: ['"Pridi"', '"Bai Jamjuree"', 'Georgia', 'serif'],
+            serifItalic: ['"Instrument Serif"', 'Georgia', 'serif'],
+            display: ['"Bai Jamjuree"', '"IBM Plex Sans Thai"', 'sans-serif'],
+            sans: ['"IBM Plex Sans Thai"', '"Inter"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-cream: #FDF9EF;
+      --bg-stone: #F1EEE4;
+      --bg-switch: #EAE8DE;
+      --bg-forest: #143025;
+      --bg-forest-card: #0F241C;
+      --btn-ochre: #79590F;
+      --text-ink: #13201A;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-ink);
+      font-family: 'IBM Plex Sans Thai', 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .editorial-heading {
+      font-family: 'Pridi', 'Bai Jamjuree', serif;
+      letter-spacing: -0.02em;
+    }
+
+    .serif-italic {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+    }
+
+    /* Subtle film grain texture */
+    .noise-overlay {
+      background-image: radial-gradient(rgba(19, 32, 26, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1EEE4;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C5C0B0;
+      border-radius: 9999px;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+    .animate-float {
+      animation: floatSlow 4.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseWave {
+      0%, 100% { transform: scaleY(0.45); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-bar {
+      animation: pulseWave 1.2s ease-in-out infinite;
+      transform-origin: bottom;
+    }
+  </style>
+</head>
+<body class="selection:bg-ochre-400/30 selection:text-ink-900">
+
+  <!-- ================= STICKY TOP NAVBAR ================= -->
+  <header class="sticky top-0 z-40 bg-cream-50/95 backdrop-blur-md border-b border-cream-400/60 transition-all">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Brand -->
+      <a href="#overview" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-9 h-9 rounded-lg bg-forest-900 text-cream-50 flex items-center justify-center font-display font-bold text-sm shadow-sm group-hover:bg-forest-800 transition-colors">
+          M
+        </div>
+        <div class="leading-tight">
+          <div class="font-editorial font-semibold text-base text-ink-900 tracking-tight">MewTeetawat.AI</div>
+          <div class="text-[10px] font-medium tracking-widest uppercase text-ink-500">EDITING BOT • BRAIN 2.0</div>
+        </div>
+      </a>
+
+      <!-- Center Pill Navigation -->
+      <nav aria-label="เมนูหลัก" class="hidden md:flex items-center bg-cream-200/90 border border-cream-400/70 rounded-full p-1 text-xs font-medium text-ink-700">
+        <a href="#overview" data-nav="overview" class="nav-pill px-3.5 py-1.5 rounded-full bg-cream-400/70 text-ink-900 font-semibold transition-all">ภาพรวม</a>
+        <a href="#dual-brain" data-nav="dual-brain" class="nav-pill px-3.5 py-1.5 rounded-full hover:text-ink-900 transition-all">สมอง 2 ซีก</a>
+        <a href="#jtbd" data-nav="jtbd" class="nav-pill px-3.5 py-1.5 rounded-full hover:text-ink-900 transition-all">จุดขาย</a>
+        <a href="#showcase" data-nav="showcase" class="nav-pill px-3.5 py-1.5 rounded-full hover:text-ink-900 transition-all">ตัวอย่างสไตล์</a>
+        <a href="#early-bird" data-nav="early-bird" class="nav-pill px-3.5 py-1.5 rounded-full hover:text-ink-900 transition-all">แพ็กเกจ Early Bird</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-2.5">
+        <button onclick="openCheckoutModal('single')" class="inline-flex items-center gap-2 bg-ochre-700 hover:bg-ochre-800 text-cream-50 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all active:scale-[0.99] min-h-[40px]">
+          <span>จองสิทธิ์ Early Bird</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <button onclick="scrollToSection('early-bird')" title="Early Bird VIP Status" aria-label="Early Bird VIP" class="w-9 h-9 rounded-full bg-forest-900 text-ochre-400 flex items-center justify-center hover:bg-forest-800 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION ================= -->
+  <main>
+    <section id="overview" class="pt-8 pb-14 sm:pt-12 sm:pb-20 noise-overlay">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- Left Column: Copy + Early Bird Offer Card -->
+          <div class="lg:col-span-7 space-y-6">
+            <!-- Top Kicker Pill -->
+            <div class="inline-flex flex-wrap items-center gap-2 text-[11px] font-medium text-ink-700 bg-cream-200 border border-cream-400/80 rounded-full px-3 py-1">
+              <span class="inline-flex items-center gap-1.5 font-bold text-ochre-700">
+                <span class="w-1.5 h-1.5 rounded-full bg-ochre-500"></span>
+                MEWTEETAWAT.AI • บอตตัดต่อสมอง 2 ซีกตัวแรก
+              </span>
+              <span class="text-ink-400">|</span>
+              <span class="text-ink-500">เทคเดียวจบเหมือนมีทีมโปรดักชัน</span>
+              <span class="text-ink-400">|</span>
+              <span class="font-semibold text-forest-800">AI แท้</span>
+            </div>
+
+            <!-- Main Editorial Headline -->
+            <h1 class="editorial-heading text-4xl sm:text-5xl lg:text-[54px] font-medium text-ink-900 leading-[1.15]">
+              เทคเดียวจบ.<br />
+              คลิปพร้อมลงแบบมือโปร<br />
+              <span class="serif-italic text-ochre-700 font-normal text-5xl sm:text-6xl lg:text-[64px] leading-none">out.</span>
+            </h1>
+
+            <!-- Lead Description -->
+            <p class="text-ink-700 text-base sm:text-lg leading-relaxed max-w-xl">
+              บอตตัดต่อตัวจริงที่มี <strong class="text-ink-900 font-semibold">สมอง 2 ซีก</strong> ผสานศาสตร์ครีเอทีฟและกลยุทธ์การตลาด ไม่ใช่แค่คอร์สเรียน ไม่ต้องนั่งเรียนแอปตัดต่อ ให้ AI วางโครง กำกับจังหวะ และเนรมิต 3D โมเดลให้ในคลิกเดียว
+            </p>
+
+            <!-- Hero Early Bird Offer Box -->
+            <div class="bg-cream-200/95 border border-cream-400 rounded-2xl p-5 sm:p-6 shadow-sm max-w-xl space-y-4">
+              <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span class="font-semibold text-ink-700 uppercase tracking-wider">ราคาเปิดตัวรอบแรก (EARLY BIRD OFFER)</span>
+                <span class="font-semibold text-ochre-700">จำกัด 100 สิทธิ์แรก</span>
+              </div>
+
+              <div class="flex items-baseline gap-3">
+                <span class="editorial-heading text-4xl sm:text-5xl font-semibold text-ink-900">$97</span>
+                <span class="text-sm text-ink-400 line-through font-medium">$197</span>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-[11px] font-bold bg-amber-200/90 text-ochre-800 border border-amber-300/80">
+                  ประหยัด 50%
+                </span>
+              </div>
+
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                จ่ายครั้งเดียวจบ ล็อกสิทธิ์ราคาถูกที่สุดก่อนเปิดตัวสินค้าจริง พร้อมรับลิงก์ดาวน์โหลดผ่าน LINE ทันทีที่พร้อมใช้งาน
+              </p>
+
+              <button onclick="openCheckoutModal('single')" class="w-full py-3.5 px-6 rounded-xl bg-ochre-700 hover:bg-ochre-800 text-cream-50 font-semibold text-sm sm:text-base shadow-sm hover:shadow transition-all flex items-center justify-center gap-2.5 group min-h-[48px]">
+                <span>จองสิทธิ์ Early Bird จ่ายเงินล่วงหน้าได้ทันที</span>
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+
+              <!-- 3 Micro-Trust Items -->
+              <div class="grid grid-cols-3 gap-2 pt-1 text-[11px] sm:text-xs text-ink-700 font-medium">
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-ochre-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                  <span>ล็อกราคาถูกที่สุด</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-ochre-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                  <span>เข้า LINE VIP ทันที</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-ochre-700 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                  <span>ปรับราคาขึ้นเมื่อมีสินค้า</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sub-note under box -->
+            <div class="flex flex-wrap items-center gap-3 text-xs text-ink-500">
+              <span class="inline-flex items-center gap-1.5 font-medium text-ink-700">
+                <span class="text-ochre-600">⚡</span> อัปเกรดจากต้นแบบ 30% เอกลักษณ์เฉพาะ
+              </span>
+              <span>•</span>
+              <span>ผสานระบบสมองคู่ + โมเดล 3D อัตโนมัติ</span>
+            </div>
+          </div>
+
+          <!-- Right Column: 9:16 Vertical AI Video Bot Preview Card -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-[340px] rounded-[28px] bg-forest-950 p-3 shadow-2xl border-4 border-forest-900">
+              <!-- Inner 9:16 Video Screen -->
+              <div class="relative aspect-[9/16] rounded-[20px] overflow-hidden bg-gradient-to-b from-[#17352B] via-[#0F241C] to-[#08130E] flex flex-col justify-between p-4 text-cream-50">
+                
+                <!-- Studio Background & Creator Visual -->
+                <div class="absolute inset-0 opacity-90">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=80" alt="AI Video Creator Preview" class="w-full h-full object-cover object-center brightness-75 contrast-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#081510] via-[#0D221A]/45 to-[#081510]/70"></div>
+                </div>
+
+                <!-- Top Bar Overlay: Dual Brain Status -->
+                <div class="relative z-10 flex items-center justify-between gap-2">
+                  <div class="bg-forest-950/90 backdrop-blur-md border border-emerald-500/30 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <div class="text-[10px] leading-tight">
+                      <div class="font-bold text-cream-50">DUAL-BRAIN ENGINE</div>
+                      <div class="text-emerald-300/90">สมอง 2 ซีกทำงานพร้อมกัน</div>
+                    </div>
+                  </div>
+                  <span class="bg-ochre-500/90 text-forest-950 font-bold text-[10px] px-2.5 py-1 rounded-full shadow">
+                    9:16 PRO
+                  </span>
+                </div>
+
+                <!-- Floating 3D Character Sync Card (Right side) -->
+                <div class="relative z-10 ml-auto my-auto animate-float bg-forest-900/95 backdrop-blur-md border border-ochre-400/50 rounded-2xl p-3 max-w-[205px] shadow-xl">
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="w-6 h-6 rounded-lg bg-ochre-500/20 border border-ochre-400/40 flex items-center justify-center text-xs">🕺</span>
+                    <div class="text-[11px] font-bold text-ochre-400">3D Character Sync</div>
+                  </div>
+                  <p class="text-[10px] text-cream-200/90 leading-snug">
+                    วิเคราะห์คำพูด & เสกโมเดล 3D ออกมาเดินตามคำว่า <span class="text-ochre-400 font-semibold">"ยาม"</span> อัตโนมัติ
+                  </p>
+                </div>
+
+                <!-- Center Dynamic Caption Overlay -->
+                <div class="relative z-10 text-center my-2">
+                  <div class="inline-block bg-forest-950/75 backdrop-blur-sm px-3.5 py-1.5 rounded-xl border border-white/10 shadow-lg">
+                    <div class="font-display font-bold text-lg sm:text-xl text-white drop-shadow">
+                      "ตัดต่อให้ <span class="text-ochre-400 underline decoration-2">ปัง</span>"
+                    </div>
+                    <div class="font-display font-bold text-base sm:text-lg text-emerald-300">
+                      ด้วย AI บอต!
+                    </div>
+                    <div class="text-[10px] text-cream-300 mt-0.5">เทคเดียวจบ • ฟอนต์สวย • มีโมเดล 3D</div>
+                  </div>
+                </div>
+
+                <!-- Bottom Timeline & Auto-Hook Card -->
+                <div class="relative z-10 bg-forest-950/95 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-3.5 space-y-2 shadow-xl">
+                  <div class="flex items-center justify-between text-[10px]">
+                    <span class="font-mono font-bold text-emerald-400">AUTO-HOOK • 00:00 - 00:03</span>
+                    <span class="bg-ochre-500/20 text-ochre-400 border border-ochre-400/30 px-2 py-0.5 rounded font-semibold">
+                      สมองการตลาด: เปิด
+                    </span>
+                  </div>
+                  <p class="text-xs font-semibold text-cream-50 leading-snug">
+                    "จะพูดหน้ากล้องยังไงในปี 2026 ให้คนหยุดดูตั้งแต่วินาทีแรกได้ 80%"
+                  </p>
+                  <!-- Audio Waveform Visualization -->
+                  <div class="flex items-end gap-1 h-4 pt-1">
+                    <span class="flex-1 bg-emerald-400/80 h-2 rounded-full wave-bar" style="animation-delay:0.1s"></span>
+                    <span class="flex-1 bg-emerald-400 h-4 rounded-full wave-bar" style="animation-delay:0.25s"></span>
+                    <span class="flex-1 bg-ochre-400 h-3.5 rounded-full wave-bar" style="animation-delay:0.4s"></span>
+                    <span class="flex-1 bg-ochre-400 h-4 rounded-full wave-bar" style="animation-delay:0.15s"></span>
+                    <span class="flex-1 bg-emerald-400 h-2.5 rounded-full wave-bar" style="animation-delay:0.35s"></span>
+                    <span class="flex-1 bg-emerald-400/70 h-3 rounded-full wave-bar" style="animation-delay:0.5s"></span>
+                    <span class="flex-1 bg-emerald-400 h-4 rounded-full wave-bar" style="animation-delay:0.2s"></span>
+                    <span class="flex-1 bg-ochre-400 h-3 rounded-full wave-bar" style="animation-delay:0.45s"></span>
+                    <span class="flex-1 bg-emerald-400/60 h-2 rounded-full wave-bar" style="animation-delay:0.3s"></span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4-METRIC STATS STRIP ================= -->
+    <section class="bg-cream-200 border-y border-cream-400/70 py-10 sm:py-12">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+          <div>
+            <div class="editorial-heading text-3xl sm:text-4xl font-semibold text-ink-900">1</div>
+            <div class="font-display font-bold text-sm sm:text-base text-ink-900 mt-1">บอตตัวเดียวจบ</div>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">
+              ต่างจาก ContentOS ที่มี 3 บอต บอตตัวใหม่นี้รวมพลังไว้ในตัวเดียวแต่ฉลาด 2 ด้าน
+            </p>
+          </div>
+          <div>
+            <div class="editorial-heading text-3xl sm:text-4xl font-semibold text-ink-900">2 ซีก</div>
+            <div class="font-display font-bold text-sm sm:text-base text-ink-900 mt-1">สถาปัตยกรรมคู่</div>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">
+              ผสานสมองครีเอทีฟกำกับศิลป์และสมองการตลาดปั้นคลิปไวรัลในระบบเดียว
+            </p>
+          </div>
+          <div>
+            <div class="editorial-heading text-3xl sm:text-4xl font-semibold text-ink-900">3D Real</div>
+            <div class="font-display font-bold text-sm sm:text-base text-ink-900 mt-1">โมเดลเคลื่อนไหว</div>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">
+              โมเดล 3D ออกมาเดินและเต้นตามเนื้อหาที่พูด ฟรีแลนซ์ทำไม่ได้ และยังไม่มีเจ้าไหนขาย
+            </p>
+          </div>
+          <div>
+            <div class="editorial-heading text-3xl sm:text-4xl font-semibold text-ink-900">100%</div>
+            <div class="font-display font-bold text-sm sm:text-base text-ink-900 mt-1">บอตตัดต่อจริง</div>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">
+              ได้บอตจริงไปใช้งานทันที AI วางโครงให้ตั้งแต่ต้น ไม่ใช่แค่คอร์สเรียนตัดต่อ
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION: DUAL-BRAIN ARCHITECTURE ================= -->
+    <section id="dual-brain" class="py-16 sm:py-24 scroll-mt-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <!-- Section Header -->
+        <div class="max-w-2xl space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ochre-700">
+            <span class="w-2 h-2 rounded-full bg-ochre-600"></span>
+            DUAL-BRAIN ARCHITECTURE
+          </div>
+          <h2 class="editorial-heading text-3xl sm:text-4xl font-medium text-ink-900 leading-tight">
+            สมอง 2 ซีก: อัจฉริยะสองด้านในบอตตัวเดียว
+          </h2>
+          <p class="text-sm sm:text-base text-ink-500 leading-relaxed">
+            การตัดต่อวิดีโอที่ยอดเยี่ยมต้องการทั้ง "ความสวยงามระดับศิลปะ" และ "จิตวิทยาการตลาดที่หยุดนิ้วคนดู" เราจึงสร้าง AI Engine ที่แยกการทำงานออกเป็น 2 ซีกและเลือกเปิด-ปิดตามสไตล์ของคุณได้
+          </p>
+        </div>
+
+        <!-- Two Brain Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+          <!-- Brain A: Creative -->
+          <div class="bg-white/80 border border-cream-400 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-bold tracking-wider uppercase text-ink-500">BRAIN A / ซีกครีเอทีฟ</span>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-cream-200 text-ink-700 border border-cream-400">
+                  ทำงานอัตโนมัติ
+                </span>
+              </div>
+              <h3 class="editorial-heading text-xl sm:text-2xl font-medium text-ink-900">
+                ช่วยกำกับและตัดต่อ สุนทรียภาพระดับภาพยนตร์
+              </h3>
+              <p class="text-sm text-ink-500 leading-relaxed">
+                ดูแลภาพรวมด้านศิลปะของคลิปทั้งหมด เลือกฟอนต์ที่เข้ากับอารมณ์ (Typography Pairing), คัดเกรดสี (Color Grading), วางจังหวะ B-roll และเสก <strong class="text-ink-900">3D Character Animation</strong> ให้ผลงานออกมาสวยแพงระดับสตูดิโอ
+              </p>
+            </div>
+
+            <div class="bg-cream-100/90 border border-cream-300 rounded-xl p-4 space-y-2.5 text-xs sm:text-sm text-ink-700">
+              <div class="text-[11px] font-bold text-ink-500 uppercase tracking-wider">หน้าที่หลัก:</div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-ochre-600 font-bold">🎨</span>
+                <span>เลือกฟอนต์และคู่สีตามมู้ดแอนด์โทนคลิปโดยอัตโนมัติ</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-ochre-600 font-bold">🎬</span>
+                <span>ใส่โมเดล 3D เดิน/เต้นสอดรับกับเนื้อหาที่พูด</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-ochre-600 font-bold">✨</span>
+                <span>กำกับจังหวะตัดต่อและ B-roll ให้ผลงานสวยเนียนระดับโปร</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brain B: Marketing -->
+          <div class="bg-cream-200/70 border border-ochre-400/50 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-bold tracking-wider uppercase text-ink-700">BRAIN B / ซีกการตลาด</span>
+                <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-200/90 text-ochre-800 border border-amber-300">
+                  เลือกเปิด / ปิดได้
+                </span>
+              </div>
+              <h3 class="editorial-heading text-xl sm:text-2xl font-medium text-ink-900">
+                ดันคลิปให้ไวรัล จิตวิทยาความสนใจทุกวินาที
+              </h3>
+              <p class="text-sm text-ink-500 leading-relaxed">
+                มุ่งเน้นการเพิ่ม <strong class="text-ink-900">Retention Rate</strong> สูงสุด ออกแบบฮุก (Hook) ใน 3 วินาทีแรก, ปรับระยะ Dynamic Zoom สลับ 1.0x – 1.3x เพื่อกันคนปัดผ่าน และช่วยเกลาสคริปต์ให้คมขึ้นตั้งแต่ต้นจนจบ
+              </p>
+            </div>
+
+            <div class="bg-cream-50/90 border border-cream-400/80 rounded-xl p-4 space-y-2.5 text-xs sm:text-sm text-ink-700">
+              <div class="text-[11px] font-bold text-ink-500 uppercase tracking-wider">หน้าที่หลัก:</div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-ochre-600 font-bold">🔥</span>
+                <span>สร้าง Visual & Verbal Hook หยุดนิ้วคนดูใน 3 วินาทีแรก</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-ochre-600 font-bold">🔍</span>
+                <span>เปลี่ยนซูมอัตโนมัติ (Dynamic Zoom) รักษาความสนใจ</span>
+              </div>
+              <div class="flex items-start gap-2.5">
+                <span class="text-ochre-600 font-bold">✍️</span>
+                <span>รีไรท์และจัดเรียงสคริปต์ใหม่ให้ไวรัลขึ้น (เมื่อเปิดโหมดการตลาด)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive User Control Switch Box -->
+        <div class="bg-cream-300/90 border border-cream-400 rounded-2xl p-6 sm:p-8 space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="text-[10px] font-bold uppercase tracking-widest text-ink-500">USER CONTROL SWITCH</div>
+              <h3 class="editorial-heading text-lg sm:text-xl font-medium text-ink-900 mt-0.5">
+                ผู้ใช้สามารถ "เปิด" หรือ "ปิด" สมองการตลาดได้ตามสไตล์ของคุณ
+              </h3>
+            </div>
+            <!-- Interactive Switch Buttons -->
+            <div class="inline-flex bg-cream-50 border border-cream-400 rounded-xl p-1 self-start sm:self-auto">
+              <button id="btn-mode-on" onclick="setMarketingMode(true)" class="px-4 py-2 rounded-lg text-xs font-bold bg-forest-900 text-cream-50 shadow-sm transition-all min-h-[38px]">
+                เปิด โหมดการตลาด
+              </button>
+              <button id="btn-mode-off" onclick="setMarketingMode(false)" class="px-4 py-2 rounded-lg text-xs font-semibold text-ink-500 hover:text-ink-900 transition-all min-h-[38px]">
+                ปิด โหมดการตลาด
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Mode ON Card -->
+            <div id="card-mode-on" onclick="setMarketingMode(true)" class="cursor-pointer rounded-xl p-5 bg-cream-50 border-2 border-forest-800 shadow-sm transition-all space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 font-display font-bold text-sm sm:text-base text-ink-900">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                  <span>โหมดเปิดสมองการตลาด (Viral Optimizer)</span>
+                </div>
+                <span id="badge-mode-on" class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800">กำลังเลือก</span>
+              </div>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                AI แก้สคริปต์และฮุก ดึงช่วงที่เด่นที่สุดมาไว้หน้าคลิป เหมาะกับคนที่พูดสดไม่มีสคริปต์ ได้คลิปจบในเทคเดียวพร้อมไวรัลทันที
+              </p>
+            </div>
+
+            <!-- Mode OFF Card -->
+            <div id="card-mode-off" onclick="setMarketingMode(false)" class="cursor-pointer rounded-xl p-5 bg-cream-200/70 border border-cream-400 opacity-80 hover:opacity-100 transition-all space-y-2">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2 font-display font-bold text-sm sm:text-base text-ink-900">
+                  <span class="w-2.5 h-2.5 rounded-full bg-ochre-500"></span>
+                  <span>โหมดปิดสมองการตลาด (Pure Purist Flow)</span>
+                </div>
+                <span id="badge-mode-off" class="hidden text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-ochre-800">กำลังเลือก</span>
+              </div>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                ไม่แตะสคริปต์ของคุณ ตัดเฉพาะส่วนที่พูดวนให้กระชับและเนียนที่สุด เล่าเรื่องเป็นเส้นตรง เหมาะกับคนที่คิดสคริปต์มาเป๊ะแล้ว
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION: 3 STRATEGIC ADVANTAGES (JTBD) ================= -->
+    <section id="jtbd" class="py-16 sm:py-24 bg-cream-100/70 border-y border-cream-400/60 scroll-mt-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div class="max-w-2xl space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ochre-700">
+            <span class="w-2 h-2 rounded-full bg-ochre-600"></span>
+            STRATEGIC ADVANTAGE
+          </div>
+          <h2 class="editorial-heading text-3xl sm:text-4xl font-medium text-ink-900">
+            จุดขาย 3 ด้าน: ยกระดับจากต้นแบบ
+          </h2>
+          <p class="text-sm sm:text-base text-ink-500 leading-relaxed">
+            เราใช้โครงสร้างเว็บของจัสตินเป็นฐาน 100% และเพิ่มความเป็นตัวเองอีกราว 30% เพื่อยกระดับจาก "คอร์สสอนตัดต่อ" สู่ "บอตทำงานจริงอัตโนมัติ" ใน 3 มิติหลัก
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- 01 Functional -->
+          <div class="bg-cream-50 border border-cream-400 rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-sm">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-cream-200 border border-cream-400 flex items-center justify-center font-editorial font-semibold text-sm text-ink-700">
+                01
+              </div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-ochre-700">มิติที่ 1: FUNCTIONAL</div>
+              <h3 class="editorial-heading text-xl font-medium text-ink-900">ใช้งานได้จริง ไม่ใช่แค่คอร์สสอน</h3>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                ขณะที่จัสตินอธิบายฟังก์ชันครบมากแต่เป็นคอร์สสอนที่ขายครั้งเดียวจบและผู้ใช้ยังต้องกำกับเอง ของเราคือ <strong class="text-ink-900">"บอตจริงที่ใช้ได้เลย"</strong> AI วางโครงให้ตั้งแต่ต้น ผู้ใช้แก้เล็กน้อย ไม่ต้องเรียนแอปตัดต่อ
+              </p>
+            </div>
+            <div class="bg-cream-200/80 rounded-lg px-3.5 py-2.5 text-[11px] font-mono font-medium text-ink-700">
+              ✓ Ready-to-Run AI Bot • Zero Learning Curve
+            </div>
+          </div>
+
+          <!-- 02 Emotional -->
+          <div class="bg-cream-50 border border-cream-400 rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-sm">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-cream-200 border border-cream-400 flex items-center justify-center font-editorial font-semibold text-sm text-ink-700">
+                02
+              </div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-ochre-700">มิติที่ 2: EMOTIONAL</div>
+              <h3 class="editorial-heading text-xl font-medium text-ink-900">ความรู้สึกก้าวหน้าที่สุด</h3>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                สืบทอดจุดที่จัสตินทำได้ดีที่สุด: ขายความรู้สึกก้าวหน้าที่ได้ใช้ AI แทนคน ซึ่งต่างจากการจ้างฟรีแลนซ์ที่ต้องคอยบรีฟงาน รอคิวนาน และตามแก้งานไม่รู้จบ
+              </p>
+            </div>
+            <div class="bg-cream-200/80 rounded-lg px-3.5 py-2.5 text-[11px] font-mono font-medium text-ink-700">
+              ✓ AI Autonomy • No Freelancer Management Fatigue
+            </div>
+          </div>
+
+          <!-- 03 Spiritual -->
+          <div class="bg-cream-50 border border-cream-400 rounded-2xl p-6 flex flex-col justify-between space-y-6 shadow-sm">
+            <div class="space-y-3">
+              <div class="w-10 h-10 rounded-xl bg-cream-200 border border-cream-400 flex items-center justify-center font-editorial font-semibold text-sm text-ink-700">
+                03
+              </div>
+              <div class="text-[11px] font-bold uppercase tracking-wider text-ochre-700">มิติที่ 3: SPIRITUAL</div>
+              <h3 class="editorial-heading text-xl font-medium text-ink-900">รสนิยมล้ำหน้าด้วยโมเดล 3D</h3>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                รองรับทั้งสไตล์ High-Fi และ Low-Fi พร้อมชูอาวุธลับที่ฟรีแลนซ์ทำไม่ได้ และยังไม่มีเจ้าไหนขายด้านนี้ คือ <strong class="text-ink-900">โมเดล 3D ที่ออกมาเดินและเต้นตามเนื้อหา</strong> เช่นพูดเรื่อง "ยาม" ก็ขึ้นโมเดลยาม 3D ทันที
+              </p>
+            </div>
+            <div class="bg-cream-200/80 rounded-lg px-3.5 py-2.5 text-[11px] font-mono font-medium text-ink-700">
+              ✓ Dynamic 3D Avatars • Market-Exclusive Feature
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION: VISUAL SHOWCASE (HIGH-FI, LOW-FI, 3D) ================= -->
+    <section id="showcase" class="py-16 sm:py-24 scroll-mt-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <div class="text-[11px] font-bold uppercase tracking-widest text-ink-500">CINEMATIC SPECTRUM</div>
+          <h2 class="editorial-heading text-3xl sm:text-4xl font-medium text-ink-900">
+            สไตล์ตัดต่อระดับ High-Fi, Low-Fi และ 3D
+          </h2>
+          <p class="text-sm sm:text-base text-ink-500">
+            เลือกมู้ดแอนด์โทนที่เข้ากับแบรนด์ของคุณ AI จัดวางองค์ประกอบทั้ง 3 สไตล์ให้เนียนจนดูไม่ออกว่าเป็นฝีมือบอต AI
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+          <!-- Style 01: High-Fi -->
+          <div class="group space-y-4">
+            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-forest-900 border border-cream-400 shadow-md">
+              <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="High-Fi Editorial Style" class="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-900/50 to-transparent"></div>
+              <!-- Mock Studio Display UI -->
+              <div class="absolute inset-4 rounded-xl border border-white/15 bg-forest-950/80 backdrop-blur-sm p-4 flex flex-col justify-between">
+                <div class="flex items-center justify-between text-[10px] text-emerald-300 font-mono">
+                  <span>HIGH-FI STUDIO GRADE</span>
+                  <span>4K • 60FPS</span>
+                </div>
+                <div class="space-y-1">
+                  <div class="text-xs font-bold text-ochre-400">COLOR LUT • CINEMATIC TEAL</div>
+                  <div class="font-editorial text-lg text-white leading-snug">แผนบอตตัดต่อสมอง 2 ซีก</div>
+                </div>
+                <div class="bg-forest-900/95 border border-white/10 rounded-lg px-3 py-2">
+                  <div class="text-[10px] font-bold text-ochre-400 uppercase tracking-wider">STYLE 01 • HIGH-FI</div>
+                  <div class="text-xs text-cream-100 font-medium">งานภาพคมกริบ โปรดักชันระดับสตูดิโอ</div>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-1 px-1">
+              <h3 class="editorial-heading text-lg font-medium text-ink-900">สไตล์ High-Fi (Editorial Prestige)</h3>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                งานตัดต่อเนี้ยบระดับมืออาชีพ กราฟิก ฟอนต์ และซับไตเติลจัดวางอย่างประณีต เหมาะกับคลิปสร้างแบรนด์และความน่าเชื่อถือสูง
+              </p>
+            </div>
+          </div>
+
+          <!-- Style 02: Low-Fi -->
+          <div class="group space-y-4">
+            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-cream-200 border border-cream-400 shadow-md">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80" alt="Low-Fi Creator Style" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-forest-950/90 via-forest-950/20 to-transparent"></div>
+              <div class="absolute top-3 left-3 bg-amber-300 text-ink-900 font-bold text-[10px] px-2.5 py-1 rounded-full shadow">
+                ⚡ REAL CREATOR CUT
+              </div>
+              <div class="absolute bottom-4 inset-x-4 bg-forest-900/95 backdrop-blur-md border border-white/10 rounded-lg px-3.5 py-2.5">
+                <div class="text-[10px] font-bold text-ochre-400 uppercase tracking-wider">STYLE 02 • LOW-FI</div>
+                <div class="text-xs text-cream-100 font-medium">ธรรมชาติ ดูจริงใจ เหมือนเพื่อนเล่าให้ฟัง</div>
+              </div>
+            </div>
+            <div class="space-y-1 px-1">
+              <h3 class="editorial-heading text-lg font-medium text-ink-900">สไตล์ Low-Fi (Raw & Authentic)</h3>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                เน้นความเรียล เข้าถึงง่าย ตัดช่องว่างและจังหวะพูดวนออกให้กระชับเนียนตา เหมาะกับคลิป TikTok / Reels ที่ต้องการยอดแชร์ไวรัล
+              </p>
+            </div>
+          </div>
+
+          <!-- Style 03: 3D Character Sync -->
+          <div class="group space-y-4">
+            <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-forest-850 border border-cream-400 shadow-md">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80" alt="3D Character Engine" class="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-500" />
+              <div class="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-900/40 to-transparent"></div>
+              <!-- 3D Guard Badge Overlay -->
+              <div class="absolute top-4 inset-x-4 flex items-center justify-between">
+                <span class="bg-forest-950/90 text-emerald-300 border border-emerald-400/30 text-[10px] font-mono px-2.5 py-1 rounded-lg">
+                  KEYWORD: "ยาม" → 3D GUARD
+                </span>
+                <span class="text-2xl animate-bounce">👮‍♂️</span>
+              </div>
+              <div class="absolute bottom-4 inset-x-4 bg-forest-900/95 backdrop-blur-md border border-ochre-400/40 rounded-lg px-3.5 py-2.5">
+                <div class="text-[10px] font-bold text-ochre-400 uppercase tracking-wider">STYLE 03 • 3D ENGINE</div>
+                <div class="text-xs text-cream-100 font-medium">โมเดล 3D เดินและเต้นตามเนื้อหา ไม่มีใครลอกเลียนแบบได้</div>
+              </div>
+            </div>
+            <div class="space-y-1 px-1">
+              <h3 class="editorial-heading text-lg font-medium text-ink-900">ระบบ 3D Character Sync</h3>
+              <p class="text-xs sm:text-sm text-ink-500 leading-relaxed">
+                ชูโมเดล 3D ที่ออกมาเดินและเต้นตามเนื้อหา เช่น พูดเรื่องยามก็ขึ้นโมเดลยาม ฟรีแลนซ์ทำไม่ได้ และยังไม่มีเจ้าไหนขายด้านนี้
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SECTION: ALEX HORMOZI GRAND SLAM OFFER & EARLY BIRD ================= -->
+    <section id="early-bird" class="py-20 sm:py-28 bg-forest-800 text-cream-50 scroll-mt-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+        
+        <!-- Offer Header -->
+        <div class="max-w-2xl space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ochre-400">
+            <span class="w-2 h-2 rounded-full bg-ochre-400"></span>
+            ALEX HORMOZI GRAND SLAM OFFER FRAMEWORK
+          </div>
+          <h2 class="editorial-heading text-3xl sm:text-4xl lg:text-5xl font-medium text-cream-50 leading-tight">
+            ข้อเสนอพิเศษ Early Bird & แพ็กเกจพ่วง
+          </h2>
+          <p class="text-sm sm:text-base text-cream-300/85 leading-relaxed">
+            ยกเลิกระบบลงทะเบียนรอข่าวสารแบบเดิม เปลี่ยนเป็นเปิดรับสิทธิ์ล่วงหน้าในราคาที่ดีที่สุด พร้อมแยกการรับข่าวสารกับการซื้อจริงให้ชัดเจน
+          </p>
+        </div>
+
+        <!-- 2 Pricing Cards Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          
+          <!-- Option 1: Single Editing Bot ($97) -->
+          <div class="lg:col-span-5 bg-forest-900 border border-white/10 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-8 shadow-xl">
+            <div class="space-y-6">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-cream-300">OPTION 1 — บอตตัวเดียว</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-forest-950 text-ochre-400 border border-ochre-400/30">
+                  Early Bird Tier
+                </span>
+              </div>
+
+              <div>
+                <div class="flex items-baseline gap-3">
+                  <span class="editorial-heading text-4xl sm:text-5xl font-semibold text-white">$97</span>
+                  <span class="text-sm text-cream-400 line-through">$197</span>
+                </div>
+                <p class="text-xs sm:text-sm text-cream-300/80 mt-2 leading-relaxed">
+                  บอตตัดต่อ 2 ซีกตัวเต็ม จ่ายครั้งเดียวในราคา Early Bird ก่อนปรับราคาขึ้นเมื่อมีสินค้าพร้อมส่ง
+                </p>
+              </div>
+
+              <ul class="space-y-3.5 text-xs sm:text-sm text-cream-100 pt-2 border-t border-white/10">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-ochre-400 font-bold">✓</span>
+                  <span>บอตตัดต่อ AI สมอง 2 ซีก (ครีเอทีฟ + การตลาด)</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-ochre-400 font-bold">✓</span>
+                  <span>ระบบ 3D Character Sync เดิน/เต้นตามคำพูด</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-ochre-400 font-bold">✓</span>
+                  <span>สวิตช์เปิด-ปิดสมองการตลาด (แก้สคริปต์ หรือไม่แก้)</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-ochre-400 font-bold">✓</span>
+                  <span>ติดแท็ก Early Bird ในฐานข้อมูล & เชื่อม LINE แจ้งลิงก์ดาวน์โหลดทันที</span>
+                </li>
+              </ul>
+            </div>
+
+            <button onclick="openCheckoutModal('single')" class="w-full py-3.5 px-5 rounded-xl bg-cream-50 hover:bg-cream-200 text-forest-950 font-bold text-sm transition-all flex items-center justify-center gap-2 min-h-[48px]">
+              <span>เลือกแพ็กเกจเริ่มต้น ($97)</span>
+              <span>→</span>
+            </button>
+          </div>
+
+          <!-- Option 2: All-in-One Bundle ($144 = $97 + $47 ContentOS + ManyChat) -->
+          <div class="lg:col-span-7 relative bg-forest-850 border-2 border-ochre-500/80 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-8 shadow-2xl">
+            <!-- Top Floating Badge -->
+            <div class=" -mt-10 sm:-mt-11 ml-auto">
+              <span class="inline-flex items-center gap-1.5 bg-ochre-500 text-forest-950 font-bold text-xs px-3.5 py-1 rounded-full shadow-md">
+                ★ แนะนำแพ็กพ่วง • คุ้มที่สุด
+              </span>
+            </div>
+
+            <div class="space-y-6">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-ochre-400">OPTION 2 — ALL-IN-ONE BUNDLE</span>
+                <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-ochre-500/20 text-ochre-400 border border-ochre-400/40">
+                  บวกเพิ่มเพียง +$47
+                </span>
+              </div>
+
+              <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                  <div class="flex items-baseline gap-3">
+                    <span class="editorial-heading text-4xl sm:text-5xl font-semibold text-ochre-400">$144</span>
+                    <span class="text-sm text-cream-400 line-through">$394</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-cream-200 mt-1">
+                    แพ็กคู่ บอตตัดต่อ 2 ซีก + <strong class="text-white">ระบบ ContentOS ตัวเต็ม</strong>
+                  </p>
+                </div>
+                <div class="text-left sm:text-right text-xs text-cream-300">
+                  <div class="font-bold text-emerald-300">ประหยัดทันที $250</div>
+                  <div class="text-[11px] text-cream-400">ซื้อทีหลังแยกกันราคาจะแพงขึ้นมาก</div>
+                </div>
+              </div>
+
+              <!-- Stacked Value Boxes (Hormozi Style) -->
+              <div class="space-y-3 pt-2">
+                <div class="bg-forest-900/90 border border-white/10 rounded-xl p-3.5 flex items-start gap-3">
+                  <span class="text-ochre-400 font-bold mt-0.5">✓</span>
+                  <div class="text-xs sm:text-sm">
+                    <div class="font-bold text-white">บอตตัดต่อสมอง 2 ซีก (มูลค่าปกติ $197)</div>
+                    <div class="text-cream-300/80 text-xs">ครบทุกฟีเจอร์ ครีเอทีฟ + การตลาด + โมเดล 3D เดิน/เต้นตามเนื้อหา</div>
+                  </div>
+                </div>
+
+                <div class="bg-forest-900/90 border border-white/10 rounded-xl p-3.5 flex items-start gap-3">
+                  <span class="text-ochre-400 font-bold mt-0.5">✓</span>
+                  <div class="text-xs sm:text-sm">
+                    <div class="font-bold text-white">พ่วงระบบ ContentOS ตัวเต็ม (บวกเพิ่มวันนี้เพียง +$47)</div>
+                    <div class="text-cream-300/80 text-xs">ระบบบอตช่วยคิดคอนเทนต์และวางโครงสคริปต์ครบวงจร ซื้อพร้อมกันลดราคาพิเศษ</div>
+                  </div>
+                </div>
+
+                <div class="bg-forest-900/90 border border-white/10 rounded-xl p-3.5 flex items-start gap-3">
+                  <span class="text-ochre-400 font-bold mt-0.5">✓</span>
+                  <div class="text-xs sm:text-sm">
+                    <div class="font-bold text-white">ส่วนเสริม ManyChat Automation System (มูลค่า $97)</div>
+                    <div class="text-cream-300/80 text-xs">ระบบผูกแชตอัตโนมัติเปลี่ยนคนดูคลิปให้เป็นลูกค้าและปิดการขายตลอด 24 ชม.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-2.5">
+              <button onclick="openCheckoutModal('bundle')" class="w-full py-4 px-6 rounded-xl bg-ochre-600 hover:bg-ochre-500 text-white font-bold text-sm sm:text-base shadow-lg transition-all flex items-center justify-center gap-2 min-h-[50px]">
+                <span>จองสิทธิ์แพ็กคู่สุดคุ้ม (Early Bird Bundle $144)</span>
+                <span>→</span>
+              </button>
+              <p class="text-center text-[11px] text-cream-400">
+                * ซื้อตอนนี้ถูกกว่า รอให้มีสินค้าแล้วซื้อแยกทีหลังราคาจะปรับขึ้น
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 4-Step Early Bird Fulfillment Flow -->
+        <div class="pt-6 border-t border-white/10 space-y-8">
+          <div class="text-center space-y-1">
+            <div class="text-[10px] font-bold uppercase tracking-widest text-ochre-400">HOW IT WORKS</div>
+            <h3 class="editorial-heading text-2xl sm:text-3xl font-medium text-white">
+              ขั้นตอนการสั่งจองและรับสิทธิ์ Early Bird
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-forest-900/90 border border-white/10 rounded-xl p-5 space-y-2">
+              <div class="font-editorial text-xl font-bold text-ochre-400">01</div>
+              <div class="font-display font-bold text-sm text-white">ชำระเงินล่วงหน้า</div>
+              <p class="text-xs text-cream-300/80 leading-relaxed">
+                เปิดให้จ่ายเงินล่วงหน้าตั้งแต่ยังไม่มีสินค้า เพื่อล็อกราคา Early Bird ที่ถูกที่สุด
+              </p>
+            </div>
+            <div class="bg-forest-900/90 border border-white/10 rounded-xl p-5 space-y-2">
+              <div class="font-editorial text-xl font-bold text-ochre-400">02</div>
+              <div class="font-display font-bold text-sm text-white">ติดแท็กในระบบ</div>
+              <p class="text-xs text-cream-300/80 leading-relaxed">
+                ระบบบันทึกข้อมูลลูกค้าและติดแท็ก <code class="text-ochre-400">Early Bird</code> ในฐานข้อมูลโดยอัตโนมัติ
+              </p>
+            </div>
+            <div class="bg-forest-900/90 border border-white/10 rounded-xl p-5 space-y-2">
+              <div class="font-editorial text-xl font-bold text-ochre-400">03</div>
+              <div class="font-display font-bold text-sm text-white">เข้า LINE VIP ทันที</div>
+              <p class="text-xs text-cream-300/80 leading-relaxed">
+                เพิ่มเข้า LINE สำหรับกลุ่ม Early Bird เพื่อรับแจ้งเตือนความคืบหน้าอย่างใกล้ชิด
+              </p>
+            </div>
+            <div class="bg-forest-900/90 border border-white/10 rounded-xl p-5 space-y-2">
+              <div class="font-editorial text-xl font-bold text-ochre-400">04</div>
+              <div class="font-display font-bold text-sm text-white">รับลิงก์ดาวน์โหลด</div>
+              <p class="text-xs text-cream-300/80 leading-relaxed">
+                เมื่อสินค้าพร้อม ระบบส่งลิงก์ดาวน์โหลดเข้า LINE ทันที ก่อนปรับข้อความและขึ้นราคาหน้าเว็บ
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= SECTION: FAQ ================= -->
+    <section id="faq" class="py-16 sm:py-24 bg-cream-50">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+        <div class="text-center space-y-2">
+          <div class="text-[10px] font-bold uppercase tracking-widest text-ink-400">TRANSPARENCY & CLARITY</div>
+          <h2 class="editorial-heading text-3xl sm:text-4xl font-medium text-ink-900">
+            คำถามที่พบบ่อย (FAQ)
+          </h2>
+          <p class="text-xs sm:text-sm text-ink-500">
+            ตอบทุกข้อสงสัยเพื่อให้คุณมั่นใจก่อนตัดสินใจล็อกสิทธิ์ Early Bird
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <!-- FAQ 1 -->
+          <details class="group bg-cream-100/80 border border-cream-400 rounded-xl px-5 py-4 open:bg-white transition-all" open>
+            <summary class="flex items-center justify-between cursor-pointer list-none font-display font-semibold text-sm sm:text-base text-ink-900">
+              <span>บอตตัวนี้ต่างจาก ContentOS อย่างไร?</span>
+              <span class="text-ink-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-xs sm:text-sm text-ink-500 mt-3 leading-relaxed">
+              ContentOS เดิมจะมีบอตแยกกัน 3 ตัวสำหรับการคิดและวางระบบคอนเทนต์ แต่บอตตัดต่อรุ่นใหม่นี้รวมพลังไว้ใน <strong class="text-ink-900">บอตตัวเดียวที่มีสมอง 2 ซีก</strong> (ซีกครีเอทีฟ + ซีกการตลาด) และสามารถซื้อพ่วงคู่กับ ContentOS ในราคาพิเศษช่วง Early Bird ได้ครับ
+            </p>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="group bg-cream-100/80 border border-cream-400 rounded-xl px-5 py-4 open:bg-white transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none font-display font-semibold text-sm sm:text-base text-ink-900">
+              <span>ถ้าพูดวกวนหรือไม่มีสคริปต์ บอตช่วยได้อย่างไร?</span>
+              <span class="text-ink-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-xs sm:text-sm text-ink-500 mt-3 leading-relaxed">
+              คุณสามารถกด <strong class="text-ink-900">"เปิดสมองการตลาด"</strong> เพื่อให้ AI ช่วยเกลาสคริปต์และดึงช่วงที่พีคที่สุดมาเป็นฮุก 3 วินาทีแรกได้เลย เหมาะมากสำหรับคนที่พูดสดไม่มีสคริปต์ แต่ถ้าคุณเตรียมสคริปต์มาเป๊ะแล้วก็กด <strong class="text-ink-900">"ปิดสมองการตลาด"</strong> เพื่อตัดเฉพาะช่วงพูดวนให้เนียนที่สุดโดยไม่แตะเส้นเรื่องเดิมครับ
+            </p>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="group bg-cream-100/80 border border-cream-400 rounded-xl px-5 py-4 open:bg-white transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none font-display font-semibold text-sm sm:text-base text-ink-900">
+              <span>ต้องเก่งโปรแกรมตัดต่อเอง หรือต้องเรียนคอร์สคู่ไหม?</span>
+              <span class="text-ink-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-xs sm:text-sm text-ink-500 mt-3 leading-relaxed">
+              ไม่ต้องเรียนแอปตัดต่อครับ จุดขายหลักของเราคือการส่งมอบ <strong class="text-ink-900">บอตจริงที่ใช้งานได้เลย</strong> (ไม่ใช่แค่คอร์สสอน) โดย AI จะวางโครง เลือกฟอนต์ คัดสี และใส่โมเดล 3D ให้ตั้งแต่ต้น คุณเพียงตรวจทานและปรับแก้เล็กน้อยเท่านั้น
+            </p>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details class="group bg-cream-100/80 border border-cream-400 rounded-xl px-5 py-4 open:bg-white transition-all">
+            <summary class="flex items-center justify-between cursor-pointer list-none font-display font-semibold text-sm sm:text-base text-ink-900">
+              <span>สิทธิ์ Early Bird จะได้รับสินค้าเมื่อไหร่?</span>
+              <span class="text-ink-400 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-xs sm:text-sm text-ink-500 mt-3 leading-relaxed">
+              หลังชำระเงิน ระบบจะติดแท็ก <code class="text-ochre-700 font-semibold">Early Bird</code> ในฐานข้อมูลและพาคุณเข้าสู่ LINE ทันที เมื่อบอตพร้อมเปิดตัวใช้งาน ระบบจะแจ้งเตือนและส่งลิงก์ดาวน์โหลดตรงเข้า LINE ของคุณเป็นกลุ่มแรก ก่อนปรับราคาหน้าเว็บขึ้นครับ
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= BOTTOM CTA & FOOTER ================= -->
+  <footer class="bg-forest-900 text-cream-100 pt-20 pb-12 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+      
+      <!-- Grand Final CTA -->
+      <div class="text-center max-w-2xl mx-auto space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest-800 border border-ochre-400/30 text-[11px] font-bold text-ochre-400">
+          <span>⚡ MEWTEETAWAT.AI WORKFLOW</span>
+        </div>
+
+        <h2 class="editorial-heading text-3xl sm:text-5xl font-medium text-white leading-tight">
+          คลิปถัดไปของคุณเสร็จได้ในคลิกเดียว.
+        </h2>
+
+        <p class="text-xs sm:text-sm text-cream-300/80 leading-relaxed">
+          หยุดเสียเวลาตัดต่อเองหรือรอฟรีแลนซ์ ล็อกสิทธิ์บอตตัดต่อสมอง 2 ซีกในราคา Early Bird วันนี้ ก่อนปรับราคาขึ้นเมื่อสินค้าเปิดตัว
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+          <button onclick="openCheckoutModal('single')" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-ochre-700 hover:bg-ochre-600 text-white font-bold text-sm shadow-lg transition-all min-h-[48px]">
+            จองสิทธิ์ Early Bird ตอนนี้ ($97) →
+          </button>
+          <button onclick="openCheckoutModal('bundle')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-forest-800 hover:bg-forest-700 border border-white/15 text-cream-100 font-semibold text-sm transition-all min-h-[48px]">
+            ดูแพ็กเกจคู่ Bundle (+$47)
+          </button>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 text-[11px] text-cream-400 pt-1">
+          <span>• ล็อกราคาถูกที่สุด</span>
+          <span>• ไม่ต้องเรียนตัดต่อเอง</span>
+          <span>• LINE VIP Private Access</span>
+        </div>
+      </div>
+
+      <!-- Footer Columns -->
+      <div class="pt-12 border-t border-white/10 grid grid-cols-1 md:grid-cols-12 gap-10 text-xs">
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-cream-50 text-forest-950 font-bold flex items-center justify-center text-xs">M</div>
+            <span class="font-editorial text-lg font-medium text-white">MewTeetawat.AI</span>
+          </div>
+          <p class="text-cream-300/75 leading-relaxed max-w-sm">
+            "บอตตัดต่อ" Video Editing Bot สมอง 2 ซีก ผสานศาสตร์ครีเอทีฟและการตลาด เปลี่ยนการอัดคลิปเทคเดียวให้พร้อมลงแบบมือโปรสำหรับ Content Creator ยุคใหม่
+          </p>
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-forest-800/90 border border-emerald-400/20 text-[11px] text-emerald-300 font-medium">
+            <span>🛡️ 100% SATISFACTION & LAUNCH GUARANTEE</span>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 space-y-2.5">
+          <div class="font-bold text-white uppercase tracking-wider text-[11px]">ระบบและเทคโนโลยี</div>
+          <ul class="space-y-2 text-cream-300/75">
+            <li><a href="#dual-brain" class="hover:text-white">สมอง 2 ซีก (Dual-Brain)</a></li>
+            <li><a href="#jtbd" class="hover:text-white">จุดขาย 3 ด้าน</a></li>
+            <li><a href="#showcase" class="hover:text-white">ระบบโมเดล 3D อัตโนมัติ</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-2 space-y-2.5">
+          <div class="font-bold text-white uppercase tracking-wider text-[11px]">การสั่งซื้อ</div>
+          <ul class="space-y-2 text-cream-300/75">
+            <li><a href="#early-bird" class="hover:text-white">ราคา Early Bird</a></li>
+            <li><a href="#early-bird" class="hover:text-white">แพ็กพ่วง ContentOS</a></li>
+            <li><a href="#early-bird" class="hover:text-white">ส่วนเสริม ManyChat</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-3 space-y-2.5">
+          <div class="font-bold text-white uppercase tracking-wider text-[11px]">สถาปัตยกรรม</div>
+          <ul class="space-y-2 text-cream-300/75">
+            <li>Editorial Direct-Response Edition</li>
+            <li>อ้างอิงแผนพัฒนา 24 ต.ค. 2569 — mewteetawat.ai</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-cream-400">
+        <div>© 2026 MewTeetawat.AI. สงวนลิขสิทธิ์ทุกประการ. ออกแบบโดยยึดโครงสร้าง Alex Hormozi Grand Slam Offer.</div>
+        <div class="flex items-center gap-4">
+          <a href="#faq" class="hover:text-white">เงื่อนไขการใช้งาน</a>
+          <span>•</span>
+          <a href="#early-bird" class="hover:text-white">นโยบายการคืนเงินเต็มจำนวน</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= INTERACTIVE EARLY BIRD CHECKOUT MODAL ================= -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-forest-950/75 backdrop-blur-sm">
+    <div class="bg-cream-50 border border-cream-400 rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl space-y-5 relative animate-fadeIn">
+      <!-- Close button -->
+      <button onclick="closeCheckoutModal()" aria-label="ปิดหน้าต่าง" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-cream-200 hover:bg-cream-300 text-ink-700 flex items-center justify-center font-bold">
+        ✕
+      </button>
+
+      <!-- Modal Header -->
+      <div class="space-y-1">
+        <div class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-ochre-700">
+          <span class="w-2 h-2 rounded-full bg-ochre-500"></span>
+          EARLY BIRD VIP RESERVATION
+        </div>
+        <h3 class="editorial-heading text-2xl font-medium text-ink-900">
+          ล็อกสิทธิ์ Early Bird & เชื่อมต่อ LINE VIP
+        </h3>
+        <p class="text-xs text-ink-500">
+          ระบบจะติดแท็ก <code class="font-semibold text-ochre-700">Early Bird</code> ในฐานข้อมูลและส่งลิงก์เข้ากลุ่ม LINE ทันที
+        </p>
+      </div>
+
+      <!-- Plan Selector inside Modal -->
+      <div class="grid grid-cols-2 gap-3">
+        <button type="button" id="modal-plan-single" onclick="selectModalPlan('single')" class="p-3.5 rounded-xl border-2 text-left transition-all">
+          <div class="text-[11px] font-bold text-ink-500">OPTION 1 • บอตเดี่ยว</div>
+          <div class="editorial-heading text-2xl font-semibold text-ink-900 mt-0.5">$97</div>
+          <div class="text-[11px] text-ink-500">Editing Bot 2.0 ตัวเต็ม</div>
+        </button>
+        <button type="button" id="modal-plan-bundle" onclick="selectModalPlan('bundle')" class="p-3.5 rounded-xl border-2 text-left transition-all relative">
+          <span class="absolute -top-2.5 right-2 bg-ochre-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">คุ้มที่สุด +$47</span>
+          <div class="text-[11px] font-bold text-ochre-700">OPTION 2 • แพ็กคู่</div>
+          <div class="editorial-heading text-2xl font-semibold text-ink-900 mt-0.5">$144</div>
+          <div class="text-[11px] text-ink-500">+ ContentOS & ManyChat</div>
+        </button>
+      </div>
+
+      <!-- Checkout Form -->
+      <form id="earlybird-form" onsubmit="submitEarlyBird(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-semibold text-ink-700 mb-1">ชื่อ - นามสกุล / ชื่อช่องของคุณ *</label>
+          <input id="eb-name" type="text" required placeholder="เช่น คุณมิว mewteetawat.ai" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-400 text-sm text-ink-900 focus:outline-none focus:border-ochre-600" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-ink-700 mb-1">อีเมลสำหรับรับใบเสร็จ *</label>
+            <input id="eb-email" type="email" required placeholder="you@example.com" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-400 text-sm text-ink-900 focus:outline-none focus:border-ochre-600" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-ink-700 mb-1">LINE ID (เพื่อรับลิงก์ดาวน์โหลด) *</label>
+            <input id="eb-line" type="text" required placeholder="@yourlineid" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-cream-400 text-sm text-ink-900 focus:outline-none focus:border-ochre-600" />
+          </div>
+        </div>
+
+        <button id="eb-submit-btn" type="submit" class="w-full py-3.5 px-6 rounded-xl bg-ochre-700 hover:bg-ochre-800 text-white font-bold text-sm shadow transition-all min-h-[48px]">
+          ยืนยันการจองสิทธิ์ Early Bird ($97) →
+        </button>
+      </form>
+
+      <!-- Success Feedback State -->
+      <div id="eb-success" class="hidden bg-emerald-950 text-cream-50 rounded-xl p-4 space-y-2 border border-emerald-500/40">
+        <div class="flex items-center gap-2 font-bold text-sm text-emerald-300">
+          <span>✓ บันทึกสิทธิ์และติดแท็ก Early Bird VIP สำเร็จ!</span>
+        </div>
+        <p id="eb-success-text" class="text-xs text-cream-200 leading-relaxed"></p>
+      </div>
+    </div>
   </div>
-</section>
 
-<section id="jtbd">
-  <h2>จุดขาย 3 ด้าน เทียบกับจัสติน</h2>
-  <div class="tbl"><table>
-    <tr><th>ด้าน</th><th>จัสตินทำไว้</th><th>ของเรา</th></tr>
-    <tr><td>Functional<br><small style="font-weight:400;color:var(--muted)">ใช้งานได้จริง</small></td><td>อธิบายฟังก์ชันครบมาก แต่เป็นคอร์สสอน ไม่ใช่บอตจริง ขายครั้งเดียวจบ ผู้ใช้ยังต้องกำกับเอง</td><td>เป็นบอตจริงที่ใช้ได้เลย AI วางโครงให้ตั้งแต่ต้น ผู้ใช้แก้เล็กน้อย ไม่ต้องเรียนแอปตัดต่อ</td></tr>
-    <tr><td>Emotional<br><small style="font-weight:400;color:var(--muted)">ความรู้สึก</small></td><td>ทำได้ดีที่สุด ขายความรู้สึกก้าวหน้าที่ได้ใช้ AI แทนคน ซึ่งต่างจากการจ้างฟรีแลนซ์</td><td>ใช้แนวเดิมของจัสตินต่อ</td></tr>
-    <tr><td>Spiritual<br><small style="font-weight:400;color:var(--muted)">รสนิยม</small></td><td>มีสไตล์ high-fi, low-fi และ showcase ที่ตัดเนียนจนดูไม่ออกว่าเป็น AI</td><td>มี high-fi กับ low-fi แต่ไม่มี showcase จึงชูโมเดล 3D ที่ออกมาเดินและเต้นตามเนื้อหา เช่นพูดเรื่องยามก็ขึ้นโมเดลยาม ฟรีแลนซ์ทำไม่ได้ และยังไม่มีเจ้าไหนขายด้านนี้</td></tr>
-  </table></div>
-</section>
+  <!-- ================= INTERACTIVE SCRIPTS ================= -->
+  <script>
+    let currentMarketingMode = true;
+    let selectedPlan = 'single';
 
-<section id="web">
-  <h2>แผนปรับเว็บไซต์</h2>
-  <ul class="plain">
-    <li>คงโครงของจัสตินไว้ทั้งหมด โดยเฉพาะการเขียนขาย offer ตามหลัก Alex Hormozi แล้วดัดแปลงให้เป็นของเรา</li>
-    <li>เขียนข้อความขายใหม่ให้ชัดว่านี่คือบอตจริง ไม่ใช่แค่คอร์ส</li>
-    <li>เพิ่มส่วนที่จัสตินไม่มี เช่นโชว์สมอง 2 ซีกพร้อมตัวอย่างการทำงาน</li>
-    <li>เลิกระบบลงทะเบียนรับข่าวสารหรือให้ใช้ฟรี เปลี่ยนเป็นขายและรับเงินทันที</li>
-  </ul>
-</section>
+    function setMarketingMode(isOn) {
+      currentMarketingMode = isOn;
+      const btnOn = document.getElementById('btn-mode-on');
+      const btnOff = document.getElementById('btn-mode-off');
+      const cardOn = document.getElementById('card-mode-on');
+      const cardOff = document.getElementById('card-mode-off');
+      const badgeOn = document.getElementById('badge-mode-on');
+      const badgeOff = document.getElementById('badge-mode-off');
 
-<section id="early">
-  <h2>ระบบขาย Early Bird</h2>
-  <ol class="flow">
-    <li>ยังไม่มีสินค้า เปิดให้จ่ายเงินล่วงหน้า</li>
-    <li>ติดแท็ก Early Bird ในฐานข้อมูล</li>
-    <li>เพิ่มเข้า LINE แจ้งเมื่อสินค้าพร้อม แล้วส่งลิงก์ดาวน์โหลด</li>
-    <li>มีสินค้าแล้ว เปลี่ยนข้อความ และขึ้นราคาเล็กน้อย</li>
-  </ol>
-  <h3 style="margin-top:24px">ขายพ่วง ContentOS</h3>
-  <div class="price">
-    <div class="now"><strong>ซื้อตอนนี้</strong><p style="margin-top:6px">ซื้อเป็นแพ็กคู่ ลดราคามาก บวกเพิ่มประมาณ 47 ดอลลาร์ (ตัวเลขยังไม่ฟันธง)</p></div>
-    <div><strong>ซื้อทีหลัง</strong><p style="margin-top:6px">รอให้มีสินค้าแล้วซื้อแยก ราคาจะแพงขึ้น</p></div>
-  </div>
-  <p style="margin-top:12px">ContentOS รวมถึงส่วนเสริมอย่าง ManyChat จะขายแยกหรือพ่วงก็ได้ การรับข่าวสารกับการซื้อเลยต้องแยกกัน และเน้นให้ซื้อเลย</p>
-</section>
+      if (isOn) {
+        btnOn.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-forest-900 text-cream-50 shadow-sm transition-all min-h-[38px]';
+        btnOff.className = 'px-4 py-2 rounded-lg text-xs font-semibold text-ink-500 hover:text-ink-900 transition-all min-h-[38px]';
+        cardOn.className = 'cursor-pointer rounded-xl p-5 bg-cream-50 border-2 border-forest-800 shadow-sm transition-all space-y-2';
+        cardOff.className = 'cursor-pointer rounded-xl p-5 bg-cream-200/70 border border-cream-400 opacity-80 hover:opacity-100 transition-all space-y-2';
+        badgeOn.classList.remove('hidden');
+        badgeOff.classList.add('hidden');
+      } else {
+        btnOff.className = 'px-4 py-2 rounded-lg text-xs font-bold bg-forest-900 text-cream-50 shadow-sm transition-all min-h-[38px]';
+        btnOn.className = 'px-4 py-2 rounded-lg text-xs font-semibold text-ink-500 hover:text-ink-900 transition-all min-h-[38px]';
+        cardOff.className = 'cursor-pointer rounded-xl p-5 bg-cream-50 border-2 border-forest-800 shadow-sm transition-all space-y-2';
+        cardOn.className = 'cursor-pointer rounded-xl p-5 bg-cream-200/70 border border-cream-400 opacity-80 hover:opacity-100 transition-all space-y-2';
+        badgeOff.classList.remove('hidden');
+        badgeOn.classList.add('hidden');
+      }
+    }
 
-<section id="todo">
-  <h2>สิ่งที่ต้องทำ</h2>
-  <div class="prog" id="prog" aria-live="polite"></div>
-  <ul class="check" id="list"></ul>
-</section>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
 
-<p class="note">ต้นฉบับเป็นข้อความถอดเสียงจึงมีคำเพี้ยน ผมตีความ "บอตต่อ" ว่าหมายถึง "บอตตัดต่อ" และ "จัสติน" เป็นเจ้าของเว็บต้นแบบ ถ้าตีความผิดตรงไหนบอกได้</p>
-</div>
-<script>
-(function(){
-  var items=["ใช้เว็บจัสตินเป็นฐาน แล้วเพิ่มความเป็นตัวเองราว 30%","เขียนข้อความขายใหม่ให้ชัดว่าเป็นบอตจริง","เพิ่มส่วนโชว์สมอง 2 ซีกและเดโม 3D","ทำระบบจ่ายเงิน Early Bird พร้อมแท็กในฐานข้อมูล","เชื่อม LINE เพื่อแจ้งเตือนและส่งลิงก์ดาวน์โหลดภายหลัง","ทำแพ็กพ่วง ContentOS ซื้อตอนนี้ถูกกว่า ซื้อทีหลังแพงกว่า","ทำปุ่มเปิดปิดสมองการตลาด (แก้สคริปต์ หรือไม่แก้)"];
-  var key="botdit-todo",saved=[];
-  try{saved=JSON.parse(localStorage.getItem(key)||"[]")}catch(e){}
-  var ul=document.getElementById("list"),prog=document.getElementById("prog");
-  function update(){var n=ul.querySelectorAll("input:checked").length;prog.textContent="เสร็จแล้ว "+n+" จาก "+items.length+" ข้อ";
-    try{localStorage.setItem(key,JSON.stringify([].map.call(ul.querySelectorAll("input"),function(i){return i.checked})))}catch(e){}}
-  items.forEach(function(t,i){
-    var li=document.createElement("li"),l=document.createElement("label"),c=document.createElement("input"),s=document.createElement("span");
-    c.type="checkbox";c.id="t"+i;c.checked=!!saved[i];s.textContent=t;
-    c.addEventListener("change",update);l.appendChild(c);l.appendChild(s);li.appendChild(l);ul.appendChild(li);
-  });
-  update();
-})();
-</script>
+    function openCheckoutModal(plan) {
+      const modal = document.getElementById('checkout-modal');
+      document.getElementById('eb-success').classList.add('hidden');
+      document.getElementById('earlybird-form').classList.remove('hidden');
+      selectModalPlan(plan || 'single');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
 
-</body></html>
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkout-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function selectModalPlan(plan) {
+      selectedPlan = plan;
+      const singleBtn = document.getElementById('modal-plan-single');
+      const bundleBtn = document.getElementById('modal-plan-bundle');
+      const submitBtn = document.getElementById('eb-submit-btn');
+
+      if (plan === 'bundle') {
+        bundleBtn.className = 'p-3.5 rounded-xl border-2 border-ochre-600 bg-amber-50/70 text-left transition-all relative shadow-sm';
+        singleBtn.className = 'p-3.5 rounded-xl border border-cream-400 bg-white/60 text-left transition-all opacity-75 hover:opacity-100';
+        submitBtn.textContent = 'ยืนยันการจองสิทธิ์แพ็กคู่ Early Bird Bundle ($144) →';
+      } else {
+        singleBtn.className = 'p-3.5 rounded-xl border-2 border-forest-800 bg-white text-left transition-all shadow-sm';
+        bundleBtn.className = 'p-3.5 rounded-xl border border-cream-400 bg-white/60 text-left transition-all relative opacity-80 hover:opacity-100';
+        submitBtn.textContent = 'ยืนยันการจองสิทธิ์ Early Bird ($97) →';
+      }
+    }
+
+    function submitEarlyBird(e) {
+      e.preventDefault();
+      const btn = document.getElementById('eb-submit-btn');
+      const name = document.getElementById('eb-name').value.trim();
+      const lineId = document.getElementById('eb-line').value.trim();
+      const priceLabel = selectedPlan === 'bundle' ? '$144 (Editing Bot + ContentOS + ManyChat)' : '$97 (Editing Bot 2.0)';
+
+      btn.disabled = true;
+      btn.textContent = 'กำลังติดแท็ก Early Bird & เชื่อมระบบ LINE...';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        document.getElementById('earlybird-form').classList.add('hidden');
+        const successBox = document.getElementById('eb-success');
+        const successText = document.getElementById('eb-success-text');
+        successText.textContent = `ขอบคุณคุณ ${name} ระบบได้ติดแท็ก [Early_Bird_${selectedPlan.toUpperCase()}] สำหรับแพ็กเกจ ${priceLabel} เรียบร้อยแล้ว และจะส่งแจ้งเตือนพร้อมลิงก์ดาวน์โหลดไปยัง LINE: ${lineId} ทันทีที่บอตพร้อมใช้งานครับ`;
+        successBox.classList.remove('hidden');
+      }, 650);
+    }
+  </script>
+</body>
+</html>
